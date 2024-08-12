@@ -89,10 +89,12 @@ function run() {
                             .map(function (status) { return status.context; })
                             .includes(check);
                     });
+                    core.setOutput("overridden_by", mergedBy);
+                    core.setOutput("overridden_pr", prNumber);
+                    core.setOutput("has_required_checks", !failedOrMissingChecks);
+                    core.setOutput("has_required_reviews", hasRequiredReviews);
                     if (isMergedByAdmin && (failedOrMissingChecks || !hasRequiredReviews)) {
                         core.setOutput("overridden", "true");
-                        core.setOutput("overridden_by", mergedBy);
-                        core.setOutput("overridden_pr", prNumber);
                         console.log("PR #".concat(prNumber, " was merged by admin ").concat(mergedBy, ", bypassing branch protection rules."));
                     }
                     else {

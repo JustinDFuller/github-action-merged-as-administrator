@@ -17,7 +17,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.ACTION_SECRET }}
 
-      - run: ${{ steps.merged_as_admin.outputs.overridden_by }} merged PR ${{ steps.merged_as_admin.outputs.overridden_pr }} using administrator priveleges.
+      - run: echo "User '${{ steps.merged_as_admin.outputs.overridden_by }}' merged PR https://github.com/JustinDFuller/github-action-merged-as-administrator/pull/${{ steps.merged_as_admin.outputs.overridden_pr }} using administrator priveleges."
         if: ${{ steps.merged_as_admin.outputs.overridden == 'true' }}
 
       - run: The PR was NOT merged using administrator priveleges.
@@ -26,3 +26,5 @@ jobs:
       - run: echo steps.merged_as_admin.outputs.overridden=${{ steps.merged_as_admin.outputs.overridden }}
       - run: echo steps.merged_as_admin.outputs.overridden_by=${{ steps.merged_as_admin.outputs.overridden_by }}
       - run: echo steps.merged_as_admin.outputs.overridden_pr=${{ steps.merged_as_admin.outputs.overridden_pr }}
+      - run: echo steps.merged_as_admin.outputs.has_required_checks=${{ steps.merged_as_admin.outputs.has_required_checks }}
+      - run: echo steps.merged_as_admin.outputs.has_required_reviews=${{ steps.merged_as_admin.outputs.has_required_reviews }}
