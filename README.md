@@ -1,4 +1,8 @@
 # github-action-merged-as-administrator
+
+[![Admin Override Check](https://github.com/JustinDFuller/github-action-merged-as-administrator/actions/workflows/example.yml/badge.svg)](https://github.com/JustinDFuller/github-action-merged-as-administrator/actions/workflows/example.yml)
+[Github Marketplace](https://github.com/marketplace/actions/github-action-merged-as-administrator)
+
 Figure out if a PR was Merged as Administrator (Overriding Branch Protections)
 
 ## Example
