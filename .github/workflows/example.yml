@@ -1,0 +1,17 @@
+name: Admin Override Check
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  check_admin_override:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Check for Merged as Administrator
+        uses: ./
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,15 @@
+name: "github-action-merged-as-administrator"
+description: "Detect if a PR was merged as an administrator"
+inputs:
+  GITHUB_TOKEN:
+    description: "The Github Token used to make API requests."
+    required: true
+outputs:
+  merged-as-administrator:
+    description: "True if merged as administrator. False if not."
+runs:
+  using: "node20"
+  main: "dist/index.js"
+branding:
+  icon: "git-merge"
+  color: "red"

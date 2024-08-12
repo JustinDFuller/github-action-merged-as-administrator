@@ -1,0 +1,34 @@
+{
+    "name": "github-action-merged-as-administrator",
+    "version": "0.0.0",
+    "description": "Github Action to determine if a PR was merged as an administrator.",
+    "main": "index.ts",
+    "scripts": {
+      "build": "prettier -w *.ts **/*.yml && tsc index.ts && ncc build index.js --license licenses.txt"
+    },
+    "repository": {
+      "type": "git",
+      "url": "github.com/justindfuller/github-action-merged-as-administrator"
+    },
+    "keywords": [
+      "Github",
+      "Action",
+      "Pull Request",
+      "Merge",
+      "Administrator",
+      "Branch",
+      "Protection"
+    ],
+    "author": "Justin Fuller <me@justindfuller.com>",
+    "license": "MIT",
+    "dependencies": {
+      "@actions/core": "^1.10.1",
+      "@actions/github": "^6.0.0"
+    },
+    "devDependencies": {
+      "@types/node": "^20.14.12",
+      "@vercel/ncc": "^0.38.1",
+      "prettier": "^3.3.3",
+      "typescript": "^5.5.4"
+    }
+  }
