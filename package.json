@@ -4,7 +4,7 @@
     "description": "Github Action to determine if a PR was merged as an administrator.",
     "main": "index.ts",
     "scripts": {
-      "build": "prettier -w *.ts **/*.yml && tsc index.ts && ncc build index.js --license licenses.txt"
+      "build": "prettier -w *.ts **/*.yml && tsc index.ts && ncc build index.js --license licenses.txt && rm index.js"
     },
     "repository": {
       "type": "git",
