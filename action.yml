@@ -11,6 +11,10 @@ outputs:
     description: "The Github Username that used administrator priveleges to merge a PR."
   overridden_pr:
     description: "The Github PR number that merged with administrator priveleges."
+  has_required_checks:
+    description: "True if all the required checks passed."
+  has_required_reviews:
+    description: "True if all the required reviews are present."
 runs:
   using: "node20"
   main: "dist/index.js"
