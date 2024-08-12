@@ -20,7 +20,7 @@ jobs:
       - run: echo "User '${{ steps.merged_as_admin.outputs.overridden_by }}' merged PR https://github.com/JustinDFuller/github-action-merged-as-administrator/pull/${{ steps.merged_as_admin.outputs.overridden_pr }} using administrator priveleges."
         if: ${{ steps.merged_as_admin.outputs.overridden == 'true' }}
 
-      - run: The PR was NOT merged using administrator priveleges.
+      - run: echo "PR https://github.com/JustinDFuller/github-action-merged-as-administrator/pull/${{ steps.merged_as_admin.outputs.overridden_pr }} was NOT merged using administrator priveleges."
         if: ${{ steps.merged_as_admin.outputs.overridden != 'true' }}
 
       - run: echo steps.merged_as_admin.outputs.overridden=${{ steps.merged_as_admin.outputs.overridden }}
