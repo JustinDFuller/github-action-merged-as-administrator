@@ -16,7 +16,7 @@ jobs:
         id: merged_as_admin
         with:
           GITHUB_TOKEN: ${{ secrets.ACTION_SECRET }}
-          
+
       - run: ${{ steps.merged_as_admin.outputs.overridden_by }} merged PR ${{ steps.merged_as_admin.outputs.overridden_pr }} using administrator priveleges.
         if: ${{ steps.merged_as_admin.outputs.overridden == "true" }}
 
@@ -26,4 +26,3 @@ jobs:
       - run: echo steps.merged_as_admin.outputs.overridden=${{ steps.merged_as_admin.outputs.overridden }}
       - run: echo steps.merged_as_admin.outputs.overridden_by=${{ steps.merged_as_admin.outputs.overridden_by }}
       - run: echo steps.merged_as_admin.outputs.overridden_pr=${{ steps.merged_as_admin.outputs.overridden_pr }}
-
