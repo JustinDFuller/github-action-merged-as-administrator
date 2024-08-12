@@ -5,8 +5,12 @@ inputs:
     description: "The Github Token used to make API requests."
     required: true
 outputs:
-  merged-as-administrator:
+  overridden:
     description: "True if merged as administrator. False if not."
+  overridden_by:
+    description: "The Github Username that used administrator priveleges to merge a PR."
+  overridden_pr:
+    description: "The Github PR number that merged with administrator priveleges."
 runs:
   using: "node20"
   main: "dist/index.js"

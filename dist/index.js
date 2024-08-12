@@ -90,11 +90,13 @@ function run() {
                             .includes(check);
                     });
                     if (isMergedByAdmin && (failedOrMissingChecks || !hasRequiredReviews)) {
-                        core.setOutput("override_detected", "true");
+                        core.setOutput("overridden", "true");
+                        core.setOutput("overridden_by", mergedBy);
+                        core.setOutput("overridden_pr", prNumber);
                         console.log("PR #".concat(prNumber, " was merged by admin ").concat(mergedBy, ", bypassing branch protection rules."));
                     }
                     else {
-                        core.setOutput("override_detected", "false");
+                        core.setOutput("overridden", "false");
                         console.log("PR #".concat(prNumber, " was merged following branch protection rules."));
                     }
                     return [3 /*break*/, 5];
