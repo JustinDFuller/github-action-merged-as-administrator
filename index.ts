@@ -4,12 +4,42 @@ import * as github from "@actions/github";
 async function run() {
   try {
     const token = core.getInput("GITHUB_TOKEN");
-    const octokit = github.getOctokit(token);
-    const context = github.context;
+    if (!token) {
+      throw new Error("Missing input GITHUB_TOKEN");
+    }
 
-    const { owner, repo } = context.repo;
-    const prNumber = context.payload.pull_request?.number;
-    const mergedBy = context.payload.pull_request?.merged_by.login;
+    const octokit = github.getOctokit(token);
+    if (!octokit) {
+      throw new Error("Error initializing octokit");
+    }
+
+    const context = github.context;
+    if (!context) {
+      throw new Error("Error initializing github context for action");
+    }
+
+    const owner = core.getInput("owner") || context.repo.owner;
+    if (!owner) {
+      throw new Error("Missing repo owner");
+    }
+
+    const repo = core.getInput("repo") || context.repo.repo;
+    if (!repo) {
+      throw new Error("Missing repo");
+    }
+
+    const prNumber =
+      core.getInput("pr_number") || context.payload.pull_request?.number;
+    if (!prNumber) {
+      throw new Error("Missing PR number");
+    }
+
+    const mergedBy = context.payload.pull_request?.merged_by?.login;
+    if (!mergedBy) {
+      core.notice("Stopping because the PR was not merged.");
+
+      return;
+    }
 
     // Get branch protection rules
     const { data: branchProtection } =

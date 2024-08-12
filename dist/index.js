@@ -47,18 +47,41 @@ var core = __nccwpck_require__(2186);
 var github = __nccwpck_require__(5438);
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var token, octokit, context, _a, owner, repo, prNumber, mergedBy, branchProtection, statusChecks, hasRequiredReviews, isAdmin, isMergedByAdmin, combinedStatus_1, failedOrMissingChecks, error_1;
-        var _b, _c, _d, _e, _f, _g;
+        var token, octokit, context, owner, repo, prNumber, mergedBy, branchProtection, statusChecks, hasRequiredReviews, isAdmin, isMergedByAdmin, combinedStatus_1, failedOrMissingChecks, error_1;
+        var _a, _b, _c, _d, _e, _f, _g;
         return __generator(this, function (_h) {
             switch (_h.label) {
                 case 0:
                     _h.trys.push([0, 4, , 5]);
                     token = core.getInput("GITHUB_TOKEN");
+                    if (!token) {
+                        throw new Error("Missing input GITHUB_TOKEN");
+                    }
                     octokit = github.getOctokit(token);
+                    if (!octokit) {
+                        throw new Error("Error initializing octokit");
+                    }
                     context = github.context;
-                    _a = context.repo, owner = _a.owner, repo = _a.repo;
-                    prNumber = (_b = context.payload.pull_request) === null || _b === void 0 ? void 0 : _b.number;
-                    mergedBy = (_c = context.payload.pull_request) === null || _c === void 0 ? void 0 : _c.merged_by.login;
+                    if (!context) {
+                        throw new Error("Error initializing github context for action");
+                    }
+                    owner = core.getInput("owner") || context.repo.owner;
+                    if (!owner) {
+                        throw new Error("Missing repo owner");
+                    }
+                    repo = core.getInput("repo") || context.repo.repo;
+                    if (!repo) {
+                        throw new Error("Missing repo");
+                    }
+                    prNumber = core.getInput("pr_number") || ((_a = context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.number);
+                    if (!prNumber) {
+                        throw new Error("Missing PR number");
+                    }
+                    mergedBy = (_c = (_b = context.payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged_by) === null || _c === void 0 ? void 0 : _c.login;
+                    if (!mergedBy) {
+                        core.notice("Stopping because the PR was not merged.");
+                        return [2 /*return*/];
+                    }
                     return [4 /*yield*/, octokit.rest.repos.getBranchProtection({
                             owner: owner,
                             repo: repo,
